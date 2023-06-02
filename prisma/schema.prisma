@@ -27,7 +27,7 @@ model Client {
   telefone        String
   data_nascimento String
   created_at      DateTime   @default(now())
-  updated_at DateTime @updatedAt
+  updated_at      DateTime   @updatedAt
   Location        Location[]
 
   @@map("client")
@@ -37,7 +37,7 @@ model Director {
   id             String           @id @default(uuid())
   nome           String
   created_at     DateTime         @default(now())
-  updated_at DateTime @updatedAt
+  updated_at     DateTime         @updatedAt
   directorMovies directorMovies[]
 
   @@map("director")
@@ -47,7 +47,7 @@ model Actor {
   id          String        @id @default(uuid())
   nome        String
   created_at  DateTime      @default(now())
-  updated_at DateTime @updatedAt
+  updated_at  DateTime      @updatedAt
   actorMovies actorMovies[]
 
   @@map("actor")
@@ -77,14 +77,14 @@ model Movie {
   id                     String           @id @default(uuid())
   titulo                 String
   ano_lancamento         String
-  imagem                 String
+  imagem                 String?
   sinopse                String
   elenco                 String
   categoria              String
   valor_locacao          String
   qtd_copias_disponiveis String
   created_at             DateTime         @default(now())
-  updated_at DateTime @updatedAt
+  updated_at             DateTime         @updatedAt
   Location               Location[]
   directorMovies         directorMovies[]
   actorMovies            actorMovies[]
@@ -104,7 +104,7 @@ model Location {
   client                Client   @relation(fields: [id_client], references: [id])
   movie                 Movie    @relation(fields: [id_movie], references: [id])
   created_at            DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at            DateTime @updatedAt
 
   @@map("location")
 }
