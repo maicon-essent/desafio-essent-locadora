@@ -3,19 +3,39 @@ import NavBar from "@/app/navBar";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-export default function Atores(className: any) {
-  const [newActor, setNewActor] = useState('');
+export default function Atores() {
+  const [newActor, setNewActor] = useState("");
 
   async function handleCreateActor(event: FormEvent) {
     event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/atores/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: newActor,
+        }),
+      });
 
-    await fetch('http://localhost:3000/api/atores/create', {
-      method: 'POST',
-      body: JSON.stringify({ nome: newActor }),
-      headers: {
-        'Content-Type': 'application/json'
+      if (response.ok) {
+        console.log("Usuário cadastrado com sucesso!!!");
+        setNewActor("");
+      } else {
+        console.log("ERRO ao cadastrar usuário", await response.text());
       }
-    });
+    } catch (err) {
+      console.log("ERRO ao cadastrar o usuário", err);
+    }
+
+    // await fetch('http://localhost:3000/api/atores/create', {
+    //   method: 'POST',
+    //   body: JSON.stringify({ nome: newActor }),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // });
   }
 
   return (
@@ -36,6 +56,7 @@ export default function Atores(className: any) {
                 placeholder="Digite o nome do Ator"
                 value={newActor}
                 onChange={(e) => setNewActor(e.target.value)}
+                required
               />
               <div className="absolute inset-y-0 right-5 flex items-center pl-3 pointer-events-none">
                 <span className="material-icons-round text-primary_hover"></span>

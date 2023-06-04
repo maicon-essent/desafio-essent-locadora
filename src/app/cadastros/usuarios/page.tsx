@@ -3,23 +3,18 @@ import NavBar from "@/app/navBar";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-type UserProps = {
-  users: User[]
-}
-
-
-export default function Usuarios({ users }: UserProps) {
-  const [newUser, setNewUser] = useState('');
+export default function Usuarios() {
+  const [newUser, setNewUser] = useState("");
 
   async function handleCreateUser(event: FormEvent) {
     event.preventDefault();
 
-    await fetch("https://localhost:3000/api/usuarios/create", {
+    await fetch("http://localhost:3000/api/usuarios/create", {
       method: "POST",
       body: JSON.stringify({
         nome: newUser,
         email: newUser,
-        password: newUser
+        password: newUser,
       }),
       headers: {
         "Content-Type": "application/json",
