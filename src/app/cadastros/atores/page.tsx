@@ -8,17 +8,20 @@ export default function Atores() {
 
   async function handleCreateActor(event: FormEvent) {
     event.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/atores/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nome: newActor,
-        }),
-      });
 
+    try {
+      const response = await fetch(
+        "http://localhost:3000/app/api/atores/route",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nome: newActor,
+          }),
+        }
+      );
       if (response.ok) {
         console.log("Usuário cadastrado com sucesso!!!");
         setNewActor("");
@@ -28,14 +31,6 @@ export default function Atores() {
     } catch (err) {
       console.log("ERRO ao cadastrar o usuário", err);
     }
-
-    // await fetch('http://localhost:3000/api/atores/create', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ nome: newActor }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // });
   }
 
   return (

@@ -8,7 +8,7 @@ export default function Locacao() {
   const [clientes, setClientes] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("/api/filmes/get")
+    fetch("pages/api/filmes/get")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -21,7 +21,7 @@ export default function Locacao() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/clientes/get")
+    fetch("pages/api/clientes/get")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -47,6 +47,7 @@ export default function Locacao() {
             <select
               className="border border-gray_01 transition duration-300 hover:border-primary_hover focus:outline-none focus:border-primary_hover focus-visible:border-primary_hover text-md rounded-md block w-full p-3"
               placeholder="Selecione o Filme"
+              defaultValue="Filme"
             >
               {titulos.map((titulo, index) => (
                 <option key={index} value={titulo}>
@@ -62,6 +63,7 @@ export default function Locacao() {
             <select
               className="border border-gray_01 transition duration-300 hover:border-primary_hover focus:outline-none focus:border-primary_hover focus-visible:border-primary_hover text-md rounded-md block w-full p-3"
               placeholder="Selecione o Cliente"
+              defaultValue="Cliente"
             >
               {clientes.map((nome, index) => (
                 <option key={index} value={nome}>
